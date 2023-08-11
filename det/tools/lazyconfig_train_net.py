@@ -145,6 +145,10 @@ if __name__ == "__main__":
 
 #lvis eva
 #srun -p labshare2 --cpus-per-task=192 --gres=gpu:8 --ntasks=2 --ntasks-per-node=1 --job-name=eva multi-node_run.sh --config-file projects/ViTDet/configs/LVIS/cascade_mask_rcnn_vitdet_eva.py "train.init_checkpoint=eva_o365.pth" "train.output_dir=output"
+#srun -p mllm --cpus-per-task=112 --gres=gpu:8 --ntasks=4 --ntasks-per-node=1 --job-name=lvis multi-4node_run.sh --config-file projects/ViTDet/configs/LVIS/cascade_mask_rcnn_vitdet_eva.py "train.init_checkpoint=eva_o365.pth" "train.output_dir=output2/lvis1280"
+#lvis eva with v3det pretrain
+#srun -p mllm --cpus-per-task=112 --gres=gpu:8 --ntasks=4 --ntasks-per-node=1 --job-name=lvis multi-4node_run.sh --config-file projects/ViTDet/configs/LVIS/cascade_mask_rcnn_vitdet_eva.py "train.init_checkpoint=output2/v3det1280/model_final.pth" "train.output_dir=output2/v3det1280_lvis"
+
 
 #v3det eva
 #python tools/lazyconfig_train_net.py --num-gpus 1 --config-file projects/ViTDet/configs/V3Det/cascade_mask_rcnn_vitdet_eva.py "train.init_checkpoint=eva_o365.pth" "train.output_dir=output2/v3det640"

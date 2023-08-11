@@ -52,7 +52,7 @@ optimizer.params.overrides = {"pos_embed": {"weight_decay": 0.0}}
 
 model.roi_heads.update(
     _target_=CascadeROIHeads,
-    num_classes=13029,
+    num_classes=13204,
     box_heads=[
         L(FastRCNNConvFCHead)(
             input_shape=ShapeSpec(channels=256, height=7, width=7),

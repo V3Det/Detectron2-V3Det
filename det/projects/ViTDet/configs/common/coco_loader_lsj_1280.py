@@ -3,7 +3,7 @@ from detectron2 import model_zoo
 from detectron2.config import LazyCall as L
 
 # Data using LSJ
-image_size = 640
+image_size = 1280
 dataloader = model_zoo.get_config("common/data/coco.py").dataloader
 dataloader.train.mapper.augmentations = [
     L(T.RandomFlip)(horizontal=True),  # flip first

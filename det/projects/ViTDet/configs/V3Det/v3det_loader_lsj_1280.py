@@ -14,8 +14,7 @@ dataloader.train.mapper.augmentations = [
     L(T.FixedSizeCrop)(crop_size=(image_size, image_size), pad=False),
 ]
 dataloader.train.mapper.image_format = "RGB"
-#dataloader.train.total_batch_size = 64
-dataloader.train.total_batch_size = 640
+dataloader.train.total_batch_size = 64
 # recompute boxes due to cropping
 dataloader.train.mapper.recompute_boxes = False
 

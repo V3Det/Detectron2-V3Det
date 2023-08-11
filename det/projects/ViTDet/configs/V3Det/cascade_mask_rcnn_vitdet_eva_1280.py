@@ -6,6 +6,7 @@ from detectron2 import model_zoo
 from detectron2.config import LazyCall as L
 from detectron2.solver import WarmupParamScheduler
 from detectron2.modeling.backbone.vit import get_vit_lr_decay_rate
+from detectron2.evaluation.v3det_evaluation import V3DetEvaluator
 
 from detectron2.layers import ShapeSpec
 from detectron2.modeling.box_regression import Box2BoxTransform
@@ -17,6 +18,11 @@ from detectron2.modeling.roi_heads import (
 )
 
 from .v3det_loader_lsj_1280 import dataloader
+
+dataloader.evaluator = L(V3DetEvaluator)(
+    dataset_name="${..test.dataset.names}",
+    max_dets_per_image=300,
+)
 
 model = model_zoo.get_config("common/models/mask_rcnn_vitdet.py").model
 
@@ -46,7 +52,7 @@ optimizer.params.overrides = {"pos_embed": {"weight_decay": 0.0}}
 
 model.roi_heads.update(
     _target_=CascadeROIHeads,
-    num_classes=13029,
+    num_classes=13204,
     box_heads=[
         L(FastRCNNConvFCHead)(
             input_shape=ShapeSpec(channels=256, height=7, width=7),
@@ -102,8 +108,7 @@ optimizer.params.weight_decay_norm = None
 
 # Schedule
 # 100 ep = 156250 iters * 64 images/iter / 100000 images/ep
-#train.max_iter = 70001
-train.max_iter = 70001000000
+train.max_iter = 70001
 train.eval_period = 70002
 
 lr_multiplier.scheduler.milestones = [65000, 70000]

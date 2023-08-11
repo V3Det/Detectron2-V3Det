@@ -376,48 +376,49 @@ class V3DetEvaluator(DatasetEvaluator):
         # precision has dims (iou, recall, cls, area range, max dets)
         assert len(class_names) == precisions.shape[2]
 
-        rare_names = set([x['name_en'] for x in self._coco_api.dataset['categories'] if x['id'] <= 13029 and x['freq'] == 'r'])  # <=13 3099
-        comm_names = set([x['name_en'] for x in self._coco_api.dataset['categories'] if x['id'] <= 13029 and x['freq'] == 'c'])  # 13< <=17 6438
-        freq_names = set([x['name_en'] for x in self._coco_api.dataset['categories'] if x['id'] <= 13029 and x['freq'] == 'f'])  # >17  3545
-        results_per_category = []
-        rare, comm, freq = [], [], []
-        for idx, name in enumerate(class_names):
-            # area range index 0: all area ranges
-            # max dets index -1: typically 100 per image
-            precision = precisions[:, :, idx, 0, -1]
-            precision = precision[precision > -1]
-            ap = np.mean(precision) if precision.size else float("nan")
-            results_per_category.append(("{}".format(name), float(ap * 100)))
-            if precision.size:
-                if name in rare_names:
-                    rare.append(float(ap * 100))
-                elif name in comm_names:
-                    comm.append(float(ap * 100))
-                elif name in freq_names:
-                    freq.append(float(ap * 100))
+        if 'freq' in self._coco_api.dataset['categories'][0]:
+            rare_names = set([x['name_en'] for x in self._coco_api.dataset['categories'] if x['freq'] == 'r'])  # <=13 3099
+            comm_names = set([x['name_en'] for x in self._coco_api.dataset['categories'] if x['freq'] == 'c'])  # 13< <=17 6438
+            freq_names = set([x['name_en'] for x in self._coco_api.dataset['categories'] if x['freq'] == 'f'])  # >17  3545
+            results_per_category = []
+            rare, comm, freq = [], [], []
+            for idx, name in enumerate(class_names):
+                # area range index 0: all area ranges
+                # max dets index -1: typically 100 per image
+                precision = precisions[:, :, idx, 0, -1]
+                precision = precision[precision > -1]
+                ap = np.mean(precision) if precision.size else float("nan")
+                results_per_category.append(("{}".format(name), float(ap * 100)))
+                if precision.size:
+                    if name in rare_names:
+                        rare.append(float(ap * 100))
+                    elif name in comm_names:
+                        comm.append(float(ap * 100))
+                    elif name in freq_names:
+                        freq.append(float(ap * 100))
 
-        # tabulate it
-        N_COLS = min(6, len(results_per_category) * 2)
-        results_flatten = list(itertools.chain(*results_per_category))
-        results_2d = itertools.zip_longest(*[results_flatten[i::N_COLS] for i in range(N_COLS)])
-        table = tabulate(
-            results_2d,
-            tablefmt="pipe",
-            floatfmt=".3f",
-            headers=["category", "AP"] * (N_COLS // 2),
-            numalign="left",
-        )
-        self._logger.info("Per-category {} AP: \n".format(iou_type) + table)
+            # tabulate it
+            N_COLS = min(6, len(results_per_category) * 2)
+            results_flatten = list(itertools.chain(*results_per_category))
+            results_2d = itertools.zip_longest(*[results_flatten[i::N_COLS] for i in range(N_COLS)])
+            table = tabulate(
+                results_2d,
+                tablefmt="pipe",
+                floatfmt=".3f",
+                headers=["category", "AP"] * (N_COLS // 2),
+                numalign="left",
+            )
+            self._logger.info("Per-category {} AP: \n".format(iou_type) + table)
 
-        #results.update({"AP-" + name: ap for name, ap in results_per_category})
+            #results.update({"AP-" + name: ap for name, ap in results_per_category})
 
-        APr = sum(rare) / len(rare) if len(rare) else float("nan")
-        APc = sum(comm) / len(comm) if len(comm) else float("nan")
-        APf = sum(freq) / len(freq) if len(freq) else float("nan")
-        results.update({'APr':APr, 'APc':APc, 'APf':APf})
-        self._logger.info(
-            "Evaluation results for {}: \n".format(iou_type) + create_small_table(results)
-        )
+            APr = sum(rare) / len(rare) if len(rare) else float("nan")
+            APc = sum(comm) / len(comm) if len(comm) else float("nan")
+            APf = sum(freq) / len(freq) if len(freq) else float("nan")
+            results.update({'APr':APr, 'APc':APc, 'APf':APf})
+            self._logger.info(
+                "Evaluation results for {}: \n".format(iou_type) + create_small_table(results)
+            )
         return results
 
 
