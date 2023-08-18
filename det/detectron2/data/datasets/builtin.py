@@ -145,10 +145,10 @@ def register_all_coco(root):
 
 _PREDEFINED_SPLITS_LVIS = {
     "lvis_v1": {
-        "lvis_v1_train": ("coco/", "lvis/lvis_v1_train.json"),
-        "lvis_v1_val": ("coco/", "lvis/lvis_v1_val.json"),
-        "lvis_v1_test_dev": ("coco/", "lvis/lvis_v1_image_info_test_dev.json"),
-        "lvis_v1_test_challenge": ("coco/", "lvis/lvis_v1_image_info_test_challenge.json"),
+        "lvis_v1_train": ("coco/", "lvis/annotations/lvis_v1_train.json"),
+        "lvis_v1_val": ("coco/", "lvis/annotations/lvis_v1_val.json"),
+        "lvis_v1_test_dev": ("coco/", "lvis/annotations/lvis_v1_image_info_test_dev.json"),
+        "lvis_v1_test_challenge": ("coco/", "lvis/annotations/lvis_v1_image_info_test_challenge.json"),
     },
     "lvis_v0.5": {
         "lvis_v0.5_train": ("coco/", "lvis/lvis_v0.5_train.json"),
@@ -175,8 +175,8 @@ def register_all_lvis(root):
 
 _PREDEFINED_SPLITS_V3DET = {
     "v3det": {
-        "v3det_train": ("", "annotations/v3det_2023_v1_train.json"),
-        "v3det_val": ("", "annotations/v3det_2023_v1_val.json")
+        "v3det_train": ("V3Det", "V3Det/annotations/v3det_2023_v1_train.json"),
+        "v3det_val": ("V3Det", "V3Det/annotations/v3det_2023_v1_val.json")
     }
 }
 
@@ -270,7 +270,7 @@ if __name__.endswith(".builtin"):
     # Assume pre-defined datasets live in `./datasets`.
     _root = os.path.expanduser(os.getenv("DETECTRON2_DATASETS", "datasets"))
     register_all_coco(_root)
-    #register_all_lvis(_root)
+    register_all_lvis(_root)
     register_all_v3det(_root)
     register_all_cityscapes(_root)
     register_all_cityscapes_panoptic(_root)

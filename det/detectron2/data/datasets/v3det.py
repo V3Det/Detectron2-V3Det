@@ -189,7 +189,7 @@ def register_v3det_instances(name, json_file, image_root):
         json_file (str): path to the json instance annotation file.
         image_root (str or path-like): directory which contains all the images.
     """
-    metadata = get_v3det_instances_meta(json_file)
+    metadata = get_v3det_instances_meta()
     DatasetCatalog.register(name, lambda: load_v3det_json(json_file, image_root, name))
     MetadataCatalog.get(name).set(
         json_file=json_file, image_root=image_root, evaluator_type="coco", **metadata
@@ -227,7 +227,7 @@ def load_v3det_json(json_file, image_root, dataset_name=None, extra_annotation_k
         logger.info("Loading {} takes {:.2f} seconds.".format(json_file, timer.seconds()))
 
     if dataset_name is not None:
-        meta = get_v3det_instances_meta(json_file)
+        meta = get_v3det_instances_meta()
         MetadataCatalog.get(dataset_name).set(**meta)
 
     # sort indices for reproducible results
@@ -288,17 +288,25 @@ def load_v3det_json(json_file, image_root, dataset_name=None, extra_annotation_k
     return dataset_dicts
 
 
-def get_v3det_instances_meta(json_file):
-    anns = json.load(open(json_file))
-    cat_ids = [k["id"] for k in anns['categories']]
-    assert min(cat_ids) == 1 and max(cat_ids) == len(
-        cat_ids
-    ), "Category ids are not in [1, #categories], as expected"
-    # Ensure that the category list is sorted by id
-    v3det_categories = sorted(anns['categories'], key=lambda x: x["id"])
-    thing_classes = [k["name"] for k in v3det_categories]
+def get_v3det_instances_meta():
+    cat_infos = json.load(open('datasets/metadata/v3det_2023_v1_cat_info.json'))
+    id_to_name = {x['id']: x['name'] for x in cat_infos}
+    thing_dataset_id_to_contiguous_id = {
+        x['id']: i
+        for i, x in enumerate(sorted(cat_infos, key=lambda x: x['id']))
+    }
+    thing_classes = [id_to_name[k] for k in sorted(id_to_name)]
 
-    meta = {"thing_classes": thing_classes}
+    # cat_ids = [k["id"] for k in cat_infos]
+    # assert min(cat_ids) == 1 and max(cat_ids) == len(
+    #     cat_ids
+    # ), "Category ids are not in [1, #categories], as expected"
+    # # Ensure that the category list is sorted by id
+    # v3det_categories = sorted(cat_infos, key=lambda x: x["id"])
+    # thing_classes = [k["name"] for k in v3det_categories]
+
+    meta = {"thing_dataset_id_to_contiguous_id": thing_dataset_id_to_contiguous_id,
+            "thing_classes": thing_classes}
     return meta
 
 

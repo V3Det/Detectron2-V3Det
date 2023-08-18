@@ -1,0 +1,25 @@
+_BASE_: "Base-C2_L_R5021k_640b64_4x.yaml"
+MODEL:
+  MASK_ON: False
+
+  RESET_CLS_TESTS: True
+  TEST_CLASSIFIERS: ("datasets/metadata/lvis_v1_clip_a+cname.npy",)
+  TEST_NUM_CLASSES: (1203,)
+
+  ROI_BOX_HEAD:
+    USE_ZEROSHOT_CLS: True
+    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/v3det_clip_a+cname.npy'
+    USE_BIAS: -4.6
+    USE_FED_LOSS: False
+
+  ROI_HEADS:
+    NAME: DeticCascadeROIHeads
+    NUM_CLASSES: 13204
+
+DATASETS:
+  TRAIN: ("v3det_train",)
+  TEST: ("lvis_v1_val",)
+
+SOLVER:
+  LR_SCHEDULER_NAME: "WarmupCosineLR"
+  CHECKPOINT_PERIOD: 10000
