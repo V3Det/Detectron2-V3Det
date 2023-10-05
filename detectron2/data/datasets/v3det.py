@@ -289,7 +289,7 @@ def load_v3det_json(json_file, image_root, dataset_name=None, extra_annotation_k
 
 
 def get_v3det_instances_meta():
-    cat_infos = json.load(open('datasets/metadata/v3det_2023_v1_cat_info.json'))
+    cat_infos = json.load(open('datasets/metadata/v3det_2023_v1_train_cat_info.json'))
     id_to_name = {x['id']: x['name'] for x in cat_infos}
     thing_dataset_id_to_contiguous_id = {
         x['id']: i
