@@ -38,6 +38,12 @@ evaluation:
 python -u tools/train_detic.py --config-file projects/Detic/configs/ovd/BoxSup-C2_V3Det-OVD-Base_CLIP_R5021k_640b64_4x.yaml --num-gpus 8 --eval-only MODEL.WEIGHTS [model_path]
 ````
 
+## Results 
+
+    | Model                  | Seen AP50      | Unseen AP50    |
+    |------------------------|----------------|----------------|
+    | CenterNet2 CLIP        | 33.98          | 3.55           |
+
 
 ## Pretraining
 
