@@ -22,17 +22,18 @@ Please download and prepare V3Det Dataset at [V3Det Homepage](https://v3det.open
 The data includes a training set, a validation set, comprising 13,204 categories. The training set consists of 183,354 images, while the validation set has 29,821 images. The data organization is:
 
 ```
-data/
-    images/
-        <category_node>/
-            |────<image_name>.png
+datasets/
+    V3Det/
+        images/
+            <category_node>/
+                |────<image_name>.png
+                ...
             ...
-        ...
-    annotations/
-        |────v3det_2023_v1_category_tree.json       # Category tree
-        |────category_name_13204_v3det_2023_v1.txt  # Category name
-        |────v3det_2023_v1_train.json               # Train set
-        |────v3det_2023_v1_val.json                 # Validation set
+        annotations/
+            |────v3det_2023_v1_category_tree.json       # Category tree
+            |────category_name_13204_v3det_2023_v1.txt  # Category name
+            |────v3det_2023_v1_train.json               # Train set
+            |────v3det_2023_v1_val.json                 # Validation set
 ```
 
 
