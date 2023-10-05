@@ -41,20 +41,40 @@ python -u tools/train_detic.py --config-file projects/Detic/configs/ovd/BoxSup-C
 
 ## Pretraining
 
-### Pretrain on V3Det and finetune on LVIS
+### Dataset Preparation
+Step 1. Download Objects365 and LVIS data place them in the following way:
+```
+datasets/
+    metadata/
+    V3det/
+    Objects365/
+    LVIS/
+```
+
+Step 2. Get category info json and clip classifier npy using
 ```bash
+python tools/v3det_ovd_utils/get_cat_info.py --ann datasets/Objects365/objects365_train.json
+python tools/v3det_ovd_utils/dump_clip_features.py --ann datasets/Objects365/objects365_train.json
+python tools/v3det_ovd_utils/get_cat_info.py --ann datasets/lvis/annotations/lvis_v1_train.json
+python tools/v3det_ovd_utils/dump_clip_features.py --ann datasets/lvis/annotations/lvis_v1_train.json
+```
+this will generate category info json and clip classifier npy
+
+Step 3. Pretrain and Finetuning
+```bash
+# Pretrain on V3Det and finetune on LVIS
 python -u tools/train_detic.py --config-file projects/Detic/configs/pretrain/BoxSup-C2_V3Det_CLIP_R5021k_640b64_4x.py --num-gpus 8
 python -u tools/train_detic.py --config-file projects/Detic/configs/pretrain/BoxSup-C2_V3Det_LVIS_CLIP_R5021k_640b64_4x.py --num-gpus 8 MODEL.WEIGHTS [checkpoint_of_above]
 ```
 
-### Pretrain on Objects365 and finetune on LVIS
 ```bash
+# Pretrain on Objects365 and finetune on LVIS
 python -u tools/train_detic.py --config-file projects/Detic/configs/pretrain/BoxSup-C2_Obj365_CLIP_R5021k_640b64_4x.py --num-gpus 8
 python -u tools/train_detic.py --config-file projects/Detic/configs/pretrain/BoxSup-C2_Obj365_LVIS_CLIP_R5021k_640b64_4x.py --num-gpus 8 MODEL.WEIGHTS [checkpoint_of_above]
 ```
 
-### Pretrain on Objects365, V3Det and finetune on LVIS
 ```bash
+# Pretrain on Objects365, V3Det and finetune on LVIS
 python -u tools/train_detic.py --config-file projects/Detic/configs/pretrain/BoxSup-C2_Obj365_V3Det_CLIP_R5021k_640b64_4x.py --num-gpus 8
 python -u tools/train_detic.py --config-file projects/Detic/configs/pretrain/BoxSup-C2_Obj365_V3Det_LVIS_CLIP_R5021k_640b64_4x.py --num-gpus 8 MODEL.WEIGHTS [checkpoint_of_above]
 ```

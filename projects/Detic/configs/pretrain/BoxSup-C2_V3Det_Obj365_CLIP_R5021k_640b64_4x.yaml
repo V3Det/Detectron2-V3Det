@@ -4,12 +4,12 @@ MODEL:
   WEIGHTS: models/c2net_v3det/c2net_v3det_182.pth
 
   RESET_CLS_TESTS: True
-  TEST_CLASSIFIERS: ("datasets/metadata/lvis_v1_clip_a+cname.npy",)
+  TEST_CLASSIFIERS: ("datasets/metadata/lvis_v1_train_clip_a+cname.npy",)
   TEST_NUM_CLASSES: (1203,)
 
   ROI_BOX_HEAD:
     USE_ZEROSHOT_CLS: True
-    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/obj365_clip_a+cname.npy'
+    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/objects365_train_clip_a+cname.npy'
     USE_BIAS: -4.6
     USE_FED_LOSS: False
 

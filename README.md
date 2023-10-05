@@ -57,7 +57,8 @@ python tools/lazyconfig_train_net.py --num-gpus 8 --eval-only --config-file proj
 |:--------:| :-------------: | :-----: |:------:|:------------------------------------------------------------------------------:| :-------------------------------------------------------------------------------------------------------------------------: |
 |   EVA    |  Cascade R-CNN   |   2x    |  49.4  | [config](./projects/ViTDet/configs/V3Det/cascade_mask_rcnn_vitdet_eva_1536.py) |  [model](https://download.openxlab.org.cn/models/V3Det/V3Det/weight/eva_1280)   |
 
-
+## Open-Vocabulary Detection
+We also provide code implementation of Open-Vocabulary Object Detection on V3Det. Please refer to [projects/Detic](projects/Detic) for details.
 
 ## Citation
 

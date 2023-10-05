@@ -4,7 +4,7 @@ MODEL:
 
   ROI_BOX_HEAD:
     USE_ZEROSHOT_CLS: True
-    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/lvis_v1_clip_a+cname.npy'
+    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/lvis_v1_train_clip_a+cname.npy'
     CAT_FREQ_PATH: 'datasets/metadata/lvis_v1_train_cat_info.json'
     USE_FED_LOSS: True
 
