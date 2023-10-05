@@ -1,0 +1,22 @@
+_BASE_: "Base-C2_L_R5021k_640b64_4x.yaml"
+MODEL:
+  MASK_ON: False
+  WEIGHTS: models/c2net_obj365_v3det/c2net_obj365_v3det_205.pth
+
+  ROI_BOX_HEAD:
+    USE_ZEROSHOT_CLS: True
+    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/lvis_v1_train_clip_a+cname.npy'
+    CAT_FREQ_PATH: 'datasets/metadata/lvis_v1_train_cat_info.json'
+    USE_FED_LOSS: True
+
+  ROI_HEADS:
+    NAME: DeticCascadeROIHeads
+    NUM_CLASSES: 1203
+
+DATASETS:
+  TRAIN: ("lvis_v1_train",)
+  TEST: ("lvis_v1_val",)
+
+SOLVER:
+  LR_SCHEDULER_NAME: "WarmupCosineLR"
+  CHECKPOINT_PERIOD: 10000

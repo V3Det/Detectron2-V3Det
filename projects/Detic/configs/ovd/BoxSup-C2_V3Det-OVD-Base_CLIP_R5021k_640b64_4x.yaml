@@ -1,0 +1,23 @@
+_BASE_: "Base-C2_L_R5021k_640b64_4x.yaml"
+
+MODEL:
+  MASK_ON: False
+
+  ROI_BOX_HEAD:
+    USE_ZEROSHOT_CLS: True
+    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/v3det_2023_v1_train_ovd_base_clip_a+cname.npy'
+    CAT_FREQ_PATH: 'datasets/metadata/v3det_2023_v1_train_ovd_base_cat_info.json'
+    USE_BIAS: -4.6
+    USE_FED_LOSS: False
+
+  ROI_HEADS:
+    NAME: V3DetDeticCascadeROIHeads
+    NUM_CLASSES: 13204
+
+DATASETS:
+  TRAIN: ("v3det_ovd_train",)
+  TEST: ("v3det_val",)
+
+SOLVER:
+  LR_SCHEDULER_NAME: "WarmupCosineLR"
+  CHECKPOINT_PERIOD: 10000
