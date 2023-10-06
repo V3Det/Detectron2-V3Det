@@ -53,9 +53,10 @@ python tools/lazyconfig_train_net.py --num-gpus 8 --eval-only --config-file proj
 
 ## Results and Models
 
-| Backbone |      Model      | Lr schd | box AP |                                     Config                                     |                                                          Download                                                           |
-|:--------:| :-------------: | :-----: |:------:|:------------------------------------------------------------------------------:| :-------------------------------------------------------------------------------------------------------------------------: |
-|   EVA    |  Cascade R-CNN   |   2x    |  49.4  | [config](./projects/ViTDet/configs/V3Det/cascade_mask_rcnn_vitdet_eva_1536.py) |  [model](https://download.openxlab.org.cn/models/V3Det/V3Det/weight/eva_1280)   |
+| Backbone  |      Model      | Lr schd | box AP |                                       Config                                        |                                   Download                                   |
+|:---------:| :-------------: |:-------:|:------:|:-----------------------------------------------------------------------------------:|:----------------------------------------------------------------------------:|
+|    EVA    |  Cascade R-CNN   |   2x    |  49.4  |   [config](./projects/ViTDet/configs/V3Det/cascade_mask_rcnn_vitdet_eva_1536.py)    | [model](https://download.openxlab.org.cn/models/V3Det/V3Det/weight/eva_1280) |
+| CenterNet |  Cascade R-CNN   |   4x    |  30.1  | [config](./projects/Detic/configs/BoxSup-C2_V3Det_CLIP_R5021k_640b64_4x.yaml) |                                  [model](-)                                  |
 
 ## Open-Vocabulary Detection
 We also provide code implementation of Open-Vocabulary Object Detection on V3Det. Please refer to [projects/Detic](projects/Detic) for details.
