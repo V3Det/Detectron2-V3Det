@@ -44,34 +44,23 @@ for key, (image_root, json_file,
         if "://" not in json_file else json_file,
         os.path.join("datasets", image_root))
 
-# _CUSTOM_SPLITS_IMAGENET = {
-#     "imagenet_opendet_uniform":
-#     ("imagenet/",
-#      "imagenet/annotations/imagenet_opendet_uniform_image_info.json",
-#      'datasets/metadata/opendet_ovd_uniform_cat_info.json'),
-#     "imagenet_lvis_obj":
-#     ("imagenet-21k-lvis-obj/",
-#      "imagenet-21k-lvis-obj/annotations/imagenet_lvis_obj_image_info.json",
-#      "datasets/metadata/new_lvis_v1_train_non-rare-obj365_catinfo_in_lvis_obj_1274_cat_info.json"
-#      ),
-#     # "imagenet_lvis_obj_opendet_map":
-#     # ("imagenet-21k-lvis-obj/",
-#     #  'imagenet-21k-lvis-obj/annotations/imagenet_lvis_obj_opendet_map_image_info.json',
-#     #  'datasets/metadata/new_detic_opendet_non-lvis-obj_anns_train_v2_processed_13612_cat_info.json'
-#     #  ),
-# }
-#
-# from .imagenet import custom_register_imagenet_instances
-#
-# for key, (image_root, json_file,
-#           cat_info_path) in _CUSTOM_SPLITS_IMAGENET.items():
-#     if not os.path.exists(cat_info_path):
-#         continue
-#     custom_register_imagenet_instances(
-#         key, _get_builtin_metadata(cat_info_path),
-#         os.path.join("datasets", json_file)
-#         if "://" not in json_file else json_file,
-#         os.path.join("datasets", image_root))
+_CUSTOM_SPLITS_IMAGENET = {
+    "imagenet_v3det":
+    ("imagenet/", "V3Det/annotations/imagenet_v3det_image_info.json",
+     'datasets/metadata/v3det_2023_v1_train_cat_info.json'),
+}
+
+from .imagenet import custom_register_imagenet_instances
+
+for key, (image_root, json_file,
+          cat_info_path) in _CUSTOM_SPLITS_IMAGENET.items():
+    if not os.path.exists(cat_info_path):
+        continue
+    custom_register_imagenet_instances(
+        key, _get_builtin_metadata(cat_info_path),
+        os.path.join("datasets", json_file)
+        if "://" not in json_file else json_file,
+        os.path.join("datasets", image_root))
 #
 # _CUSTOM_SPLITS_LVIS = {
 #     "lvis_v1_train_no-rare-obj365":

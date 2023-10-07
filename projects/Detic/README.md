@@ -22,10 +22,10 @@ this will generate `datasets/V3Det/annotations/v3det_2023_v1_train_ovd_base.json
 
 Step 3. Get category info json and clip classifier npy using
 ```bash
-python tools/v3det_ovd_utils/get_cat_info.py --ann datasets/V3Det/annotations/v3det_2023_v1_train_ovd_base.json
-python tools/v3det_ovd_utils/dump_clip_features.py --ann datasets/V3Det/annotations/v3det_2023_v1_train_ovd_base.json
+python tools/v3det_ovd_utils/get_cat_info.py --ann datasets/V3Det/annotations/v3det_2023_v1_train.json
+python tools/v3det_ovd_utils/dump_clip_features.py --ann datasets/V3Det/annotations/v3det_2023_v1_train.json
 ```
-this will generate category info json: `datasets/metadata/v3det_2023_v1_train_ovd_base_cat_info.json` and clip classifier npy `datasets/metadata/v3det_2023_v1_train_ovd_base_clip_a+cname.npy`
+this will generate category info json: `datasets/metadata/v3det_2023_v1_train_cat_info.json` and clip classifier npy `datasets/metadata/v3det_2023_v1_train_clip_a+cname.npy`
 
 ### Training and Evaluation
 Training on single node with 8 GPUs:

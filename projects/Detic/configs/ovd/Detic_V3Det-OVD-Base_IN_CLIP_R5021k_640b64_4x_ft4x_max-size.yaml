@@ -4,14 +4,14 @@ MODEL:
   ROI_BOX_HEAD:
     USE_ZEROSHOT_CLS: True
     IMAGE_LABEL_LOSS: 'max_size'
-    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/v3det_2023_v1_train_ovd_base_clip_a+cname.npy'
-    CAT_FREQ_PATH: 'datasets/metadata/v3det_2023_v1_train_ovd_base_cat_info.json'
+    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/v3det_2023_v1_train_clip_a+cname.npy'
+    CAT_FREQ_PATH: 'datasets/metadata/v3det_2023_v1_train_cat_info.json'
     USE_FED_LOSS: False
 
   ROI_HEADS:
     NAME: V3DetDeticCascadeROIHeads
     NUM_CLASSES: 13204
-  WEIGHTS: path_of_cpt_of_v3det_ovd_base
+  WEIGHTS: v3det_ovd_base.pth
 
 SOLVER:
   MAX_ITER: 90000
