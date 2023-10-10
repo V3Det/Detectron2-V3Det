@@ -22,20 +22,32 @@ this will generate `datasets/V3Det/annotations/v3det_2023_v1_train_ovd_base.json
 
 Step 3. Get category info json and clip classifier npy using
 ```bash
-python tools/v3det_ovd_utils/get_cat_info.py --ann datasets/V3Det/annotations/v3det_2023_v1_train.json
-python tools/v3det_ovd_utils/dump_clip_features.py --ann datasets/V3Det/annotations/v3det_2023_v1_train.json
+python tools/v3det_ovd_utils/get_cat_info.py --ann datasets/V3Det/annotations/v3det_2023_v1_ovd_base_train.json
+python tools/v3det_ovd_utils/dump_clip_features.py --ann datasets/V3Det/annotations/v3det_2023_v1_ovd_base_train.json
 ```
-this will generate category info json: `datasets/metadata/v3det_2023_v1_train_cat_info.json` and clip classifier npy `datasets/metadata/v3det_2023_v1_train_clip_a+cname.npy`
+this will generate category info json: `datasets/metadata/v3det_2023_v1_ovd_base_train_cat_info.json` and clip classifier npy `datasets/metadata/v3det_2023_v1_ovd_base_train_clip_a+cname.npy`
 
-### Training and Evaluation
-Training on single node with 8 GPUs:
+### Training and Evaluation Detic
+Step 1. Training CenterNet2 CLIP on V3Det base split:
 ````bash
 python -u tools/train_detic.py --config-file projects/Detic/configs/ovd/BoxSup-C2_V3Det-OVD-Base_CLIP_R5021k_640b64_4x.yaml --num-gpus 8
 ````
+this yields the model `v3det_ovd_base.pth`
+
+Step 2. Generate V3Det ImageNet21k image info by running:
+```
+python tools/v3det_ovd_utils/create_imagenet-v3det_json.py
+```
+this generates the file `datasets/V3Det/annotations/imagenet_v3det_image_info_cls_100.json`
+
+Step 3. Training Detic:
+```
+python -u tools/train_detic.py --config-file projects/Detic/configs/ovd/Detic_V3Det-OVD-Base_IN_CLIP_R5021k_640b64_4x_ft4x_max-size.yaml --num-gpus 8
+```
 
 evaluation:
 ````bash
-python -u tools/train_detic.py --config-file projects/Detic/configs/ovd/BoxSup-C2_V3Det-OVD-Base_CLIP_R5021k_640b64_4x.yaml --num-gpus 8 --eval-only MODEL.WEIGHTS [model_path]
+python -u tools/train_detic.py --config-file projects/Detic/configs/ovd/Detic_V3Det-OVD-Base_IN_CLIP_R5021k_640b64_4x_ft4x_max-size.yaml --num-gpus 8 --eval-only MODEL.WEIGHTS [model_path]
 ````
 
 ## Results 
@@ -43,6 +55,7 @@ python -u tools/train_detic.py --config-file projects/Detic/configs/ovd/BoxSup-C
     | Model                  | Seen AP50      | Unseen AP50    |
     |------------------------|----------------|----------------|
     | CenterNet2 CLIP        | 33.98          | 3.55           |
+    | Detic                  | 34.05          | 6.83           |
 
 
 ## Pretraining

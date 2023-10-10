@@ -5,8 +5,8 @@ MODEL:
 
   ROI_BOX_HEAD:
     USE_ZEROSHOT_CLS: True
-    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/v3det_2023_v1_train_clip_a+cname.npy'
-    CAT_FREQ_PATH: 'datasets/metadata/v3det_2023_v1_train_cat_info.json'
+    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/v3det_2023_v1_ovd_base_train_clip_a+cname.npy'
+    CAT_FREQ_PATH: 'datasets/metadata/v3det_2023_v1_ovd_base_train_cat_info.json'
     USE_BIAS: -4.6
     USE_FED_LOSS: False
 

@@ -45,7 +45,8 @@ if __name__ == '__main__':
         in_dir = os.path.join(args.imagenet_path, inid)
         cat_images = []
         files = sorted(os.listdir(in_dir))
-        for file in files:
+        cls_cnt = 0
+        for i, file in enumerate(files):
             file_name = os.path.join(in_dir, file)
             try:
                 img = read_image(file_name)
@@ -61,6 +62,9 @@ if __name__ == '__main__':
             }
             count = count + 1
             cat_images.append(image)
+            cls_cnt += 1
+            if cls_cnt > 100:
+                break
         images.extend(cat_images)
         image_counts[cat_id] = len(cat_images)
         print(cat_id, inid, len(cat_images))
