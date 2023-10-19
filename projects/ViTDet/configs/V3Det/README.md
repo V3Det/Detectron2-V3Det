@@ -1,18 +1,41 @@
-# <img src="v3det_icon.jpg" height="40"> V3Det: Vast Vocabulary Visual Detection Dataset (ICCV 2023)
+<p>
+<div align="center">
 
-> V3Det: Vast Vocabulary Visual Detection Dataset (ICCV 2023) [[Paper](https://arxiv.org/abs/2304.03752), [Dataset](https://v3det.openxlab.org.cn/)]   
-> [Jiaqi Wang](https://myownskyw7.github.io/), [Pan Zhang](https://panzhang0212.github.io/), Tao Chu, Yuhang Cao, Yujie Zhou, [Tong Wu](https://wutong16.github.io/), Bin Wang, Conghui He, [Dahua Lin](http://dahua.site/)    
+# <img src="projects/ViTDet/configs/V3Det/v3det_icon.jpg" height="25"> V3Det: Vast Vocabulary Visual Detection Dataset
 
-<p align="left">
-    <img width=960 src="introduction.jpg"/>
+<div>
+    <a href='https://myownskyw7.github.io/' target='_blank'>Jiaqi Wang</a>*,
+    <a href='https://panzhang0212.github.io/' target='_blank'>Pan Zhang</a>*,
+    Tao Chu*,
+    Yuhang Cao*, </br>
+    Yujie Zhou,
+    <a href='https://wutong16.github.io/' target='_blank'>Tong Wu</a>,
+    Bin Wang,
+    Conghui He,
+    <a href='http://dahua.site/' target='_blank'>Dahua Lin</a></br>
+    (* equal contribution)</br>
+    <strong>Accepted to ICCV 2023 (Oral)</strong>
+</div>
+</p>
+<p>
+<div>
+    <strong>
+        <a href='https://arxiv.org/abs/2304.03752' target='_blank'>Paper</a>,
+        <a href='https://v3det.openxlab.org.cn/' target='_blank'>Dataset</a></br>
+    </strong>
+</div>
+</div>
 </p>
 
+<div align=center>
+    <img width=960 src="https://github.com/open-mmlab/mmdetection/assets/17425982/9c216387-02be-46e6-b0f2-b856f80f6d84"/>
+</div>
 
 <!-- [ALGORITHM] -->
 
 ## Abstract
 
-Recent advances in detecting arbitrary objects in the real world are trained and evaluated on object detection datasets with a relatively restricted vocabulary. To facilitate the development of more general visual object detection, we propose V3Det, a vast vocabulary visual detection dataset with precisely annotated bounding boxes on massive images. V3Det has several appealing properties: 1) Vast Vocabulary: It contains bounding boxes of objects from 13,029 categories on real-world images, which is 10 times larger than the existing large vocabulary object detection dataset, e.g., LVIS. 2) Hierarchical Category Organization: The vast vocabulary of V3Det is organized by a hierarchical category tree which annotates the inclusion relationship among categories, encouraging the exploration of category relationships in vast and open vocabulary object detection. 3) Rich Annotations: V3Det comprises precisely annotated objects in 245k images and professional descriptions of each category written by human experts and a powerful chatbot. By offering a vast exploration space, V3Det enables extensive benchmarks on both vast and open vocabulary object detection, leading to new observations, practices, and insights for future research. It has the potential to serve as a cornerstone dataset for developing more general visual perception systems.
+Recent advances in detecting arbitrary objects in the real world are trained and evaluated on object detection datasets with a relatively restricted vocabulary. To facilitate the development of more general visual object detection, we propose V3Det, a vast vocabulary visual detection dataset with precisely annotated bounding boxes on massive images. V3Det has several appealing properties: 1) Vast Vocabulary: It contains bounding boxes of objects from 13,204 categories on real-world images, which is 10 times larger than the existing large vocabulary object detection dataset, e.g., LVIS. 2) Hierarchical Category Organization: The vast vocabulary of V3Det is organized by a hierarchical category tree which annotates the inclusion relationship among categories, encouraging the exploration of category relationships in vast and open vocabulary object detection. 3) Rich Annotations: V3Det comprises precisely annotated objects in 243k images and professional descriptions of each category written by human experts and a powerful chatbot. By offering a vast exploration space, V3Det enables extensive benchmarks on both vast and open vocabulary object detection, leading to new observations, practices, and insights for future research. It has the potential to serve as a cornerstone dataset for developing more general visual perception systems. V3Det is available at https://v3det.openxlab.org.cn/.
 
 
 ## Prepare Dataset
@@ -23,18 +46,18 @@ The data includes a training set, a validation set, comprising 13,204 categories
 
 ```
 data/
-    images/
-        <category_node>/
-            |────<image_name>.png
+    V3Det/
+        images/
+            <category_node>/
+                |────<image_name>.png
+                ...
             ...
-        ...
-    annotations/
-        |────v3det_2023_v1_category_tree.json       # Category tree
-        |────category_name_13204_v3det_2023_v1.txt  # Category name
-        |────v3det_2023_v1_train.json               # Train set
-        |────v3det_2023_v1_val.json                 # Validation set
+        annotations/
+            |────v3det_2023_v1_category_tree.json       # Category tree
+            |────category_name_13204_v3det_2023_v1.txt  # Category name
+            |────v3det_2023_v1_train.json               # Train set
+            |────v3det_2023_v1_val.json                 # Validation set
 ```
-
 
 ## Training
 Please follow the [EVA](https://github.com/baaivision/EVA/tree/master/EVA-01/det) to build the Detectron2.
@@ -52,19 +75,22 @@ python tools/lazyconfig_train_net.py --num-gpus 8 --eval-only --config-file proj
 
 ## Results and Models
 
-| Backbone |      Model      | Lr schd | box AP |          Config          |                                                          Download                                                           |
-|:--------:| :-------------: | :-----: |:------:|:------------------------:| :-------------------------------------------------------------------------------------------------------------------------: |
-|   EVA    |  Cascade R-CNN   |   2x    |  49.4  |       [config](./cascade_mask_rcnn_vitdet_eva_1536.py)       |  [model](https://download.openxlab.org.cn/models/V3Det/V3Det/weight/eva_1280)   |
+| Backbone  |      Model      | Lr schd | box AP |                                       Config                                        |                                   Download                                   |
+|:---------:| :-------------: |:-------:|:------:|:-----------------------------------------------------------------------------------:|:----------------------------------------------------------------------------:|
+|    EVA    |  Cascade R-CNN   |   2x    |  49.4  |   [config](./projects/ViTDet/configs/V3Det/cascade_mask_rcnn_vitdet_eva_1536.py)    | [model](https://download.openxlab.org.cn/models/V3Det/V3Det/weight/eva_1280) |
+| CenterNet |  Cascade R-CNN   |   4x    |  30.1  | [config](./projects/Detic/configs/BoxSup-C2_V3Det_CLIP_R5021k_640b64_4x.yaml) |                                  [model](-)                                  |
 
-
+## Open-Vocabulary Detection
+We also provide code implementation of Open-Vocabulary Object Detection on V3Det. Please refer to [projects/Detic](projects/Detic) for details.
 
 ## Citation
 
 ```latex
-@article{wang2023v3det,
-  title={V3det: Vast vocabulary visual detection dataset},
-  author={Wang, Jiaqi and Zhang, Pan and Chu, Tao and Cao, Yuhang and Zhou, Yujie and Wu, Tong and Wang, Bin and He, Conghui and Lin, Dahua},
-  journal={arXiv preprint arXiv:2304.03752},
-  year={2023}
+@inproceedings{wang2023v3det,
+      title = {V3Det: Vast Vocabulary Visual Detection Dataset}, 
+      author = {Wang, Jiaqi and Zhang, Pan and Chu, Tao and Cao, Yuhang and Zhou, Yujie and Wu, Tong and Wang, Bin and He, Conghui and Lin, Dahua},
+      booktitle = {The IEEE International Conference on Computer Vision (ICCV)},
+      month = {October},
+      year = {2023}
 }
 ```
