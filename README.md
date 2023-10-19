@@ -40,6 +40,7 @@ datasets/
 ## Training
 Please follow the [EVA](https://github.com/baaivision/EVA/tree/master/EVA-01/det) to build the Detectron2.
 
+### EVA
 Slurm training on 4 nodes (32 A100):
 ````bash
 srun -p cluster --cpus-per-task=112 --gres=gpu:8 --ntasks=4 --ntasks-per-node=1 --job-name=eva1280 multi-4node_run.sh --config-file projects/ViTDet/configs/V3Det/cascade_mask_rcnn_vitdet_eva_1280.py "train.init_checkpoint=eva_o365.pth" "train.output_dir=output2/v3det1280"
@@ -50,6 +51,16 @@ evaluation on 8 A100:
 python tools/lazyconfig_train_net.py --num-gpus 8 --eval-only --config-file projects/ViTDet/configs/V3Det/cascade_mask_rcnn_vitdet_eva_1536.py "dataloader.evaluator.output_dir=output2/v3det1280_eval" "train.init_checkpoint=output2/v3det1280/model_final.pth"
 ````
 
+### CenterNet2
+Training on a single node with 8 gpus:
+```bash
+python -u tools/train_detic.py --config-file projects/Detic/configs/BoxSup-C2_V3Det_CLIP_R5021k_640b64_4x.yaml --num-gpus 8
+```
+
+Evaluation on a single node with 8 gpus:
+```bash
+python -u tools/train_detic.py --config-file projects/Detic/configs/BoxSup-C2_V3Det_CLIP_R5021k_640b64_4x.yaml --num-gpus 8 --eval-only MODEL.WEIGHTS [model_path]
+```
 
 ## Results and Models
 
