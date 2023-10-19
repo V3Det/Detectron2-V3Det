@@ -45,7 +45,7 @@ Please download and prepare V3Det Dataset at [V3Det Homepage](https://v3det.open
 The data includes a training set, a validation set, comprising 13,204 categories. The training set consists of 183,354 images, while the validation set has 29,821 images. The data organization is:
 
 ```
-datasets/
+data/
     V3Det/
         images/
             <category_node>/
@@ -58,7 +58,6 @@ datasets/
             |────v3det_2023_v1_train.json               # Train set
             |────v3det_2023_v1_val.json                 # Validation set
 ```
-
 
 ## Training
 Please follow the [EVA](https://github.com/baaivision/EVA/tree/master/EVA-01/det) to build the Detectron2.
