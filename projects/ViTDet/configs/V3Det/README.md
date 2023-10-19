@@ -1,7 +1,7 @@
 <p>
 <div align="center">
 
-# <img src="projects/ViTDet/configs/V3Det/v3det_icon.jpg" height="25"> V3Det: Vast Vocabulary Visual Detection Dataset
+# <img src="v3det_icon.jpg" height="25"> V3Det: Vast Vocabulary Visual Detection Dataset
 
 <div>
     <a href='https://myownskyw7.github.io/' target='_blank'>Jiaqi Wang</a>*,
