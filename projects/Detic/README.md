@@ -52,10 +52,10 @@ python -u tools/train_detic.py --config-file projects/Detic/configs/ovd/Detic_V3
 
 ## Results 
 
-    | Model                  | Seen AP50      | Unseen AP50    |
+    | Model                  | Seen AP      | Unseen AP    |
     |------------------------|----------------|----------------|
-    | CenterNet2 CLIP        | 33.98          | 3.55           |
-    | Detic                  | 34.05          | 6.83           |
+    | CenterNet2 CLIP        | 28.6           | 3.0            |
+    | Detic                  | 28.7           | 5.6            |
 
 
 ## Pretraining

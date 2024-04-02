@@ -51,6 +51,16 @@ _CUSTOM_SPLITS_IMAGENET = {
         "V3Det/annotations/imagenet_v3det_image_info_cls_100.json",
         "datasets/metadata/v3det_2023_v1_train_cat_info.json",
     ),
+    "v3det_novel_cls_1": (
+        "",
+        "V3Det/annotations/v3det_image_info_novel-cls_1.json",
+        "datasets/metadata/v3det_2023_v1_train_cat_info.json",
+    ),
+    "v3det_cls_1": (
+        "",
+        "V3Det/annotations/v3det_2023_v1_train_ovd_img-info-1.json",
+        "datasets/metadata/v3det_2023_v1_train_cat_info.json",
+    )
 }
 
 from .imagenet import custom_register_imagenet_instances

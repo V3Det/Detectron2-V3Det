@@ -4,8 +4,8 @@ MODEL:
   ROI_BOX_HEAD:
     USE_ZEROSHOT_CLS: True
     IMAGE_LABEL_LOSS: 'max_size'
-    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/v3det_2023_v1_ovd_base_train_clip_a+cname.npy'
-    CAT_FREQ_PATH: 'datasets/metadata/v3det_2023_v1_ovd_base_train_cat_info.json'
+    ZEROSHOT_WEIGHT_PATH: 'datasets/metadata/v3det_2023_v1_train_clip_a+cname.npy'
+    CAT_FREQ_PATH: 'datasets/metadata/v3det_2023_v1_ovd_base_cat_info.json'
     USE_FED_LOSS: False
 
   ROI_HEADS:
@@ -21,7 +21,7 @@ SOLVER:
   WARMUP_ITERS: 1000
   WARMUP_FACTOR: 0.001
 DATASETS:
-  TRAIN: ("v3det_ovd_train","imagenet_v3det")
+  TRAIN: ("v3det_ovd_train","imagenet_v3det_cls_100")
   TEST: ("v3det_val",)
 DATALOADER:
   SAMPLER_TRAIN: "MultiDatasetSampler"
