@@ -96,7 +96,7 @@ We also provide code implementation of Open-Vocabulary Object Detection on V3Det
 
 ## License
 
-Detectron2 is released under the [Apache 2.0 license](LICENSE).
+Detectron2-V3Det is released under the [Apache 2.0 license](LICENSE).
 
 ## Citation
 
