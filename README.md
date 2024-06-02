@@ -94,6 +94,10 @@ python -u tools/train_detic.py --config-file projects/Detic/configs/BoxSup-C2_V3
 ## Open-Vocabulary Detection
 We also provide code implementation of Open-Vocabulary Object Detection on V3Det. Please refer to [projects/Detic](projects/Detic) for details.
 
+## License
+
+Detectron2 is released under the [Apache 2.0 license](LICENSE).
+
 ## Citation
 
 ```latex
